@@ -1,8 +1,11 @@
+
+
 package main
 
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/gofiber/fiber/v2"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -15,16 +18,21 @@ type PingCount struct{
 type PingPongs struct{
 	Pongs []string `json:"pongs"`
 }
-func MakePingRequest(port int, host string, pingCount PingCount){
+func MakePingRequest(port int, pingCount PingCount)error{
 	pingCountAsByte,_ := json.Marshal(pingCount)
-	resp,err := http.Post(fmt.Sprintf("%s:%d",host,port),"",strings.NewReader(string(pingCountAsByte)))
+	resp,err := http.Post(fmt.Sprintf("http://localhost:%d/ping",port),fiber.MIMEApplicationJSON,strings.NewReader(string(pingCountAsByte)))
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
-	body ,_:= ioutil.ReadAll(resp.Body)
+	var body []byte
+	body ,err = ioutil.ReadAll(resp.Body)
+	if err != nil{
+		return err
+	}
 	var response = PingPongs{}
 	json.Unmarshal(body,&response)
 	log.Printf("%v",response)
+	return nil
 }
 func main(){
 

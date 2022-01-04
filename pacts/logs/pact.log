@@ -1,0 +1,71 @@
+I, [2022-01-04T12:34:13.656701 #12534]  INFO -- : Registered expected interaction POST /ping
+D, [2022-01-04T12:34:13.656887 #12534] DEBUG -- : {
+  "description": "A post request with ping count",
+  "providerState": "I get pongs array amounf of sent ping count ",
+  "request": {
+    "method": "POST",
+    "path": "/ping",
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "times": 3
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "json_class": "Pact::SomethingLike",
+      "contents": {
+        "pongs": [
+          "pong",
+          "pong",
+          "pong"
+        ]
+      }
+    }
+  },
+  "metadata": null
+}
+I, [2022-01-04T12:34:13.953521 #12534]  INFO -- : Received request POST /ping
+D, [2022-01-04T12:34:13.953702 #12534] DEBUG -- : {
+  "path": "/ping",
+  "query": "",
+  "method": "post",
+  "body": {
+    "times": 3
+  },
+  "headers": {
+    "Content-Length": "11",
+    "Content-Type": "application/json",
+    "Host": "localhost:50676",
+    "User-Agent": "Go-http-client/1.1",
+    "Accept-Encoding": "gzip",
+    "Version": "HTTP/1.1"
+  }
+}
+I, [2022-01-04T12:34:13.954107 #12534]  INFO -- : Found matching response for POST /ping
+D, [2022-01-04T12:34:13.954190 #12534] DEBUG -- : {
+  "status": 200,
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "json_class": "Pact::SomethingLike",
+    "contents": {
+      "pongs": [
+        "pong",
+        "pong",
+        "pong"
+      ]
+    }
+  }
+}
+I, [2022-01-04T12:34:13.955177 #12534]  INFO -- : Verifying - interactions matched
+I, [2022-01-04T12:34:13.956045 #12534]  INFO -- : Cleared interactions
