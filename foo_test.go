@@ -12,18 +12,19 @@ import (
 )
 
 // Testing a post operation done correctly is enough for unit test
+// It is not actually need because we will write a consumer test.
 
-
+type PingTest struct{
+	Times int `json:"times"`
+}
 func TestIPerformPostOperationToAnApiSuccessfully(t *testing.T){
-	type PingCount struct{
-		Times int `json:"times"`
-	}
-	testData := PingCount{Times: 2}
+
+	testData := PingTest{Times: 2}
 
 	// here we created an api to test if our post operation is success.
 	app := fiber.New()
 	app.Post("/ping", func(ctx *fiber.Ctx) error {
-		sentData := PingCount{}
+		sentData := PingTest{}
 		if err := ctx.BodyParser(&sentData) ; err != nil{
 			return ctx.SendStatus(http.StatusNotFound)
 		}
